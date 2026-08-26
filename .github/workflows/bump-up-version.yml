@@ -1,0 +1,61 @@
+name: Bump versions
+
+on:
+  schedule:
+    # 04:00 Malaysia Time (Asia/Kuala_Lumpur, UTC+8, no DST) = 20:00 UTC
+    - cron: "0 20 * * *"
+  workflow_dispatch:
+    inputs:
+      apps:
+        description: "App names to bump, space-separated. Leave empty for all."
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bump-up-version
+  cancel-in-progress: false
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Bump scoop manifests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          APPS: ${{ github.event.inputs.apps }}
+        run: |
+          set -euo pipefail
+          if [[ -n "${APPS:-}" ]]; then
+            read -r -a app_args <<< "$APPS"
+            bash scripts/bump-up-version.sh "${app_args[@]}"
+          else
+            bash scripts/bump-up-version.sh
+          fi
+
+      - name: Commit and push
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          mapfile -t files < <(git diff --name-only -- bucket/)
+          if [[ ${#files[@]} -eq 0 ]]; then
+            echo "No manifest changes."
+            exit 0
+          fi
+
+          for file in "${files[@]}"; do
+            app=$(basename "$file" .json)
+            version=$(jq -r .version "$file")
+            git add "$file"
+            git commit -m "chore: bump ${app} to ${version}"
+          done
+
+          git push
