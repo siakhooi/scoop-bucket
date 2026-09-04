@@ -2,8 +2,9 @@ name: Bump versions
 
 on:
   schedule:
-    # 04:00 Malaysia Time (Asia/Kuala_Lumpur, UTC+8, no DST) = 20:00 UTC
-    - cron: "0 20 * * *"
+    # 04:00 Malaysia time (Asia/Kuala_Lumpur)
+    - cron: "0 4 * * *"
+      timezone: "Asia/Kuala_Lumpur"
   workflow_dispatch:
     inputs:
       apps:
