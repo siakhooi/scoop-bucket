@@ -1,0 +1,47 @@
+# siakhooi/scoop-bucket
+
+> Personal [Scoop](https://scoop.sh) bucket of Windows 64-bit packages by Siak Hooi. Source code for each app lives in its own GitHub repo; this repo only holds Scoop manifests. Bucket name: `siakhooi`. License: MIT.
+
+Add the bucket, then install any app by name:
+
+```
+scoop bucket add siakhooi https://github.com/siakhooi/scoop-bucket.git
+scoop install json2table
+scoop install picsum
+scoop install jexl-executor
+scoop install semvery
+scoop install fibo-planner
+```
+
+Manifests are `bucket/<app>.json`. Each one points at a GitHub Release zip (`architecture.64bit.url`), a SHA-256 `hash`, and a `bin` path. Do not invent download URLs; read the manifest (or the project's latest GitHub Release) for the current version. Manifests are refreshed from GitHub Releases by `scripts/bump-up-version.sh` (no args = all apps; args = those apps) and a scheduled GitHub Action.
+
+## Applications
+
+- [json2table](https://github.com/siakhooi/json2table): Go CLI that prints JSON as a table. Binary `json2table.exe`. Spec file via `-s` / `JSON2TABLE_SPEC`; column list via `-c`. README: https://raw.githubusercontent.com/siakhooi/json2table/main/README.md
+- [picsum](https://github.com/siakhooi/picsum): Go CLI that fetches images from picsum.photos (`picsum 200` or `picsum 200 300`). Binary `picsum.exe`. README: https://raw.githubusercontent.com/siakhooi/picsum/main/README.md
+- [jexl-executor](https://github.com/siakhooi/jexl-executor): Runs JEXL scripts in a chain against a shared JSON context, or from a YAML execution config (`-c`). Binary `jexl-executor/jexl-executor.exe`. README: https://raw.githubusercontent.com/siakhooi/jexl-executor/main/README.md
+- [semvery](https://github.com/siakhooi/semvery): Semver CLI (`isValid`, `isStable`, `isGreater`, `isLower`, `isEqual`, `isEquivalent`). Binary `semvery/semvery.exe`. README: https://raw.githubusercontent.com/siakhooi/semvery/main/README.md
+- [fibo-planner](https://github.com/siakhooi/fibo-planner): Self-contained planning-poker web app (Go binary + WebSockets, default port 8080). Binary `fibo-planner.exe`. README: https://raw.githubusercontent.com/siakhooi/fibo-planner/main/README.md
+
+## Manifests
+
+- [json2table.json](https://raw.githubusercontent.com/siakhooi/scoop-bucket/main/bucket/json2table.json): Scoop manifest (version, 64-bit zip URL, hash, `json2table.exe`)
+- [picsum.json](https://raw.githubusercontent.com/siakhooi/scoop-bucket/main/bucket/picsum.json): Scoop manifest (version, 64-bit zip URL, hash, `picsum.exe`)
+- [jexl-executor.json](https://raw.githubusercontent.com/siakhooi/scoop-bucket/main/bucket/jexl-executor.json): Scoop manifest (version, 64-bit zip URL, hash, `jexl-executor/jexl-executor.exe`)
+- [semvery.json](https://raw.githubusercontent.com/siakhooi/scoop-bucket/main/bucket/semvery.json): Scoop manifest (version, 64-bit zip URL, hash, `semvery/semvery.exe`)
+- [fibo-planner.json](https://raw.githubusercontent.com/siakhooi/scoop-bucket/main/bucket/fibo-planner.json): Scoop manifest (version, 64-bit zip URL, hash, `fibo-planner.exe`)
+
+## This repository
+
+- [README](https://raw.githubusercontent.com/siakhooi/scoop-bucket/main/README.md): Human overview and install commands
+- [bump-up-version.sh](https://raw.githubusercontent.com/siakhooi/scoop-bucket/main/scripts/bump-up-version.sh): Check GitHub Releases and rewrite manifest `version` / `url` / `hash`
+- [justfile](https://raw.githubusercontent.com/siakhooi/scoop-bucket/main/justfile): `just bump-all` and `just bump <app>`
+- [Bump versions workflow](https://raw.githubusercontent.com/siakhooi/scoop-bucket/main/.github/workflows/bump-up-version.yml): Daily 04:00 Asia/Kuala_Lumpur; also `workflow_dispatch` with optional space-separated `apps`
+- [LICENSE](https://raw.githubusercontent.com/siakhooi/scoop-bucket/main/LICENSE): MIT
+
+## Optional
+
+- [Scoop](https://scoop.sh): Windows command-line installer this bucket targets
+- [Scoop app manifests](https://github.com/ScoopInstaller/Scoop/wiki/App-Manifests): Manifest schema (`version`, `architecture`, `url`, `hash`, `bin`)
+- [siakhooi/apt](https://github.com/siakhooi/apt): Related Linux APT packages for some of the same tools
+- [siakhooi/rpms](https://github.com/siakhooi/rpms): Related Linux RPM packages for some of the same tools
