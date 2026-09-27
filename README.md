@@ -13,6 +13,7 @@ scoop bucket add siakhooi https://github.com/siakhooi/scoop-bucket.git
 - [picsum](https://github.com/siakhooi/picsum) - CLI client for picsum.photos
 - [jexl-executor](https://github.com/siakhooi/jexl-executor) - jexl scripts executor
 - [semvery](https://github.com/siakhooi/semvery) - semver utilities
+- [fibo-planner](https://github.com/siakhooi/fibo-planner) - web app to run planning poker technique
 
 ## Usage
 ```
@@ -20,6 +21,7 @@ scoop install json2table
 scoop install picsum
 scoop install jexl-executor
 scoop install semvery
+scoop install fibo-planner
 ```
 
 [![Wise](https://img.shields.io/badge/Funding-Wise-33cb56.svg?logo=wise)](https://wise.com/pay/me/siakn3)
