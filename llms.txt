@@ -11,6 +11,7 @@ scoop install picsum
 scoop install jexl-executor
 scoop install semvery
 scoop install fibo-planner
+scoop install cooonfig
 ```
 
 Manifests are `bucket/<app>.json`. Each one points at a GitHub Release zip (`architecture.64bit.url`), a SHA-256 `hash`, and a `bin` path. Do not invent download URLs; read the manifest (or the project's latest GitHub Release) for the current version. Manifests are refreshed from GitHub Releases by `scripts/bump-up-version.sh` (no args = all apps; args = those apps) and a scheduled GitHub Action.
@@ -22,6 +23,7 @@ Manifests are `bucket/<app>.json`. Each one points at a GitHub Release zip (`arc
 - [jexl-executor](https://github.com/siakhooi/jexl-executor): Runs JEXL scripts in a chain against a shared JSON context, or from a YAML execution config (`-c`). Binary `jexl-executor/jexl-executor.exe`. README: https://raw.githubusercontent.com/siakhooi/jexl-executor/main/README.md
 - [semvery](https://github.com/siakhooi/semvery): Semver CLI (`isValid`, `isStable`, `isGreater`, `isLower`, `isEqual`, `isEquivalent`). Binary `semvery/semvery.exe`. README: https://raw.githubusercontent.com/siakhooi/semvery/main/README.md
 - [fibo-planner](https://github.com/siakhooi/fibo-planner): Self-contained planning-poker web app (Go binary + WebSockets, default port 8080). Binary `fibo-planner.exe`. README: https://raw.githubusercontent.com/siakhooi/fibo-planner/main/README.md
+- [cooonfig](https://github.com/siakhooi/cooonfig): Combines multiple configuration sources into a unified model and generates configuration and environment files. Binary `cooonfig.exe`. README: https://raw.githubusercontent.com/siakhooi/cooonfig/main/README.md
 
 ## Manifests
 
@@ -30,6 +32,7 @@ Manifests are `bucket/<app>.json`. Each one points at a GitHub Release zip (`arc
 - [jexl-executor.json](https://raw.githubusercontent.com/siakhooi/scoop-bucket/main/bucket/jexl-executor.json): Scoop manifest (version, 64-bit zip URL, hash, `jexl-executor/jexl-executor.exe`)
 - [semvery.json](https://raw.githubusercontent.com/siakhooi/scoop-bucket/main/bucket/semvery.json): Scoop manifest (version, 64-bit zip URL, hash, `semvery/semvery.exe`)
 - [fibo-planner.json](https://raw.githubusercontent.com/siakhooi/scoop-bucket/main/bucket/fibo-planner.json): Scoop manifest (version, 64-bit zip URL, hash, `fibo-planner.exe`)
+- [cooonfig.json](https://raw.githubusercontent.com/siakhooi/scoop-bucket/main/bucket/cooonfig.json): Scoop manifest (version, 64-bit zip URL, hash, `cooonfig.exe`)
 
 ## This repository
 
